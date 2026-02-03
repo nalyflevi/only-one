@@ -146,34 +146,7 @@ iframe {
   color: #d81b60;
   margin-top: 8px;
 }
-/* --- AJUSTE PARA CELULAR --- */
-@media (max-width: 800px) {
-    .container {
-        display: flex;
-        flex-direction: column; /* Apila todo hacia abajo */
-        padding: 10px;
-    }
 
-    .center {
-        order: 1; /* ¡IMPORTANTE! El texto y juego suben al principio */
-        margin-bottom: 20px;
-    }
-
-    .side-left, .side-right {
-        order: 2; /* Todas las fotos se van para abajo */
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .side img {
-        width: 140px; /* Tamaño ideal para que entren 2 por fila */
-        height: 180px;
-        margin-bottom: 10px;
-    }
-}
 @media (max-width: 900px) {
   .container { grid-template-columns: 1fr; }
   .side { display: none; }
@@ -311,7 +284,5 @@ function mostrarPlaylist() {
 </body>
 </html>
 
-</body>
-</html>
 
 
