@@ -67,29 +67,30 @@ body {
 }
 
 .center { text-align: center; }
-h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #486b5a; }
-.symbols { font-size: 1.4em; margin: 25px 0; opacity: 0.7; }
-.music-button { margin: 25px 0; padding: 14px 32px; background: linear-gradient(135deg, #f2b6cd, #cce5d8); border: none; border-radius: 35px; cursor: pointer; color: #355f50; }
+h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #486b5a; margin-bottom: 5px;}
+.symbols { font-size: 1.4em; margin: 15px 0; opacity: 0.7; }
+.music-button { margin: 15px 0; padding: 12px 28px; background: linear-gradient(135deg, #f2b6cd, #cce5d8); border: none; border-radius: 35px; cursor: pointer; color: #355f50; font-weight: bold;}
 
-/* REPRODUCTOR SPOTIFY CORREGIDO */
-#playlist iframe {
-  max-width: 100%; /* Evita que se vea corrido en el celular */
-  border-radius: 14px;
+/* REPRODUCTOR SPOTIFY ARREGLADO */
+#playlist {
+  margin: 20px auto;
+  max-width: 300px;
+  width: 90%;
 }
 
 .timeline {
-  margin: 60px auto;
+  margin: 40px auto;
   max-width: 460px;
   background: rgba(245,245,245,0.9);
-  padding: 30px;
+  padding: 25px;
   border-radius: 25px;
 }
 
 /* 🎮 JUEGO */
 #game-container {
-  width: 360px;
-  max-width: 95%; /* Para que entre en el cel */
-  height: 260px;
+  width: 340px;
+  max-width: 90%;
+  height: 220px;
   margin: 20px auto;
   background: #fff;
   border: 3px solid #f2b6cd;
@@ -101,7 +102,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #486b5a; }
 #player {
   position: absolute;
   bottom: 0;
-  left: 60px;
+  left: 50px;
   width: 30px;
   height: 30px;
   background: #f8bbd0;
@@ -110,17 +111,12 @@ h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #486b5a; }
 
 .heart { position: absolute; font-size: 20px; }
 
-/* --- SOLO CORRECCIÓN CELULAR --- */
+/* AJUSTE CELULAR */
 @media (max-width: 900px) {
-  .container { 
-    display: flex; 
-    flex-direction: column; 
-  }
-  
-  .center { order: 1; } /* Texto arriba */
-  
+  .container { display: flex; flex-direction: column; }
+  .center { order: 1; }
   .side { 
-    order: 2; /* Fotos abajo */
+    order: 2; 
     display: flex; 
     flex-direction: row; 
     flex-wrap: wrap; 
@@ -129,28 +125,27 @@ h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #486b5a; }
     margin-top: 30px;
     height: auto;
   }
-
   .side img {
-    position: relative; /* Ya no flotan una encima de otra en cel */
+    position: relative;
     left: auto;
     top: auto !important;
     transform: none;
-    width: 100px; /* Más pequeñas */
-    height: 140px;
+    width: 90px;
+    height: 130px;
     animation: floatFadeSimple 6s infinite ease-in-out;
   }
-
   @keyframes floatFadeSimple {
     0%, 100% { opacity: 0; transform: translateY(10px); }
     50% { opacity: 1; transform: translateY(0); }
   }
+  h1 { font-size: 2.2em; }
 }
 </style>
 </head>
 <body>
 
 <script>
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 20; i++) {
   const star = document.createElement("div");
   star.className = "star";
   star.innerHTML = "✦";
@@ -171,9 +166,11 @@ for (let i = 0; i < 25; i++) {
     <h1>only one</h1>
     <p>Entre todas las vidas posibles,<br>te elijo a vos.</p>
     <div class="symbols">✧ ☽ ♡ ✦</div>
+    
     <button class="music-button" onclick="document.getElementById('playlist').style.display='block'">▶ tocar música</button>
-    <div id="playlist" style="display:none; margin-top: 20px;">
-      <iframe src="https://open.spotify.com/embed/track/TU_LINK_AQUI" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    
+    <div id="playlist" style="display:none;">
+      <iframe style="border-radius:12px" src="http://googleusercontent.com/spotify.com/5" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
     <div class="timeline">
@@ -191,7 +188,7 @@ for (let i = 0; i < 25; i++) {
 </div>
 
 <div class="center" style="padding-bottom:100px;">
-  <h2>un pequeño juego para vos ♡</h2>
+  <h2>un pequeño juego ♡</h2>
   <div id="ui">❤️ Amor: <span id="score">0</span></div>
   <div id="game-container" onclick="jump()">
     <div id="player"></div>
@@ -204,7 +201,7 @@ function jump() {
   if (isJumping) return;
   isJumping = true;
   let up = setInterval(() => {
-    if (position >= 110) {
+    if (position >= 100) {
       clearInterval(up);
       let down = setInterval(() => {
         if (position <= 0) { clearInterval(down); isJumping = false; }
@@ -221,12 +218,12 @@ function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
   heart.innerHTML = '💖';
-  heart.style.left = '360px';
+  heart.style.left = '340px';
   heart.style.bottom = Math.random() * 100 + 20 + 'px';
   document.getElementById('game-container').appendChild(heart);
   let move = setInterval(() => {
     let x = parseInt(heart.style.left);
-    if (x < 80 && x > 50 && position + 30 > parseInt(heart.style.bottom)) {
+    if (x < 70 && x > 40 && position + 30 > parseInt(heart.style.bottom)) {
       score++;
       document.getElementById('score').innerText = score;
       heart.remove(); clearInterval(move);
