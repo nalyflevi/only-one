@@ -66,21 +66,9 @@ body {
   100% { opacity: 0; transform: translate(-50%, -40px); }
 }
 
-.center {
-  text-align: center;
-}
-
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  color: #486b5a;
-}
-
-.symbols {
-  font-size: 1.4em;
-  margin: 25px 0;
-  opacity: 0.7;
-}
+.center { text-align: center; }
+h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #486b5a; }
+.symbols { font-size: 1.4em; margin: 25px 0; opacity: 0.7; }
 
 .music-button {
   margin: 25px 0;
@@ -92,10 +80,11 @@ h1 {
   color: #355f50;
 }
 
+/* AJUSTE SPOTIFY */
 iframe {
   margin-top: 30px;
   border-radius: 14px;
-  max-width: 100%; /* Ajuste para que no se corra en el celular */
+  max-width: 100%;
 }
 
 .timeline {
@@ -107,14 +96,10 @@ iframe {
 }
 
 /* 🎮 JUEGO */
-.game-section {
-  margin: 80px auto;
-  text-align: center;
-}
-
+.game-section { margin: 80px auto; text-align: center; }
 #game-container {
   width: 360px;
-  max-width: 95%; /* Ajuste para que entre en la pantalla del celular */
+  max-width: 95%;
   height: 260px;
   margin: 20px auto;
   background: #fff;
@@ -123,44 +108,15 @@ iframe {
   position: relative;
   overflow: hidden;
 }
+#player { position: absolute; bottom: 0; left: 60px; width: 30px; height: 30px; background: #f8bbd0; border-radius: 6px; }
+.heart { position: absolute; font-size: 20px; }
 
-#player {
-  position: absolute;
-  bottom: 0;
-  left: 60px;
-  width: 30px;
-  height: 30px;
-  background: #f8bbd0;
-  border-radius: 6px;
-}
-
-.heart {
-  position: absolute;
-  font-size: 20px;
-}
-
-#ui {
-  margin-top: 10px;
-}
-
-.reward {
-  font-weight: bold;
-  color: #d81b60;
-  margin-top: 8px;
-}
-
-/* --- AJUSTE EXCLUSIVO PARA CELULAR --- */
+/* --- AJUSTE CELULAR --- */
 @media (max-width: 900px) {
-  .container { 
-    display: flex; 
-    flex-direction: column; 
-    padding: 20px 10px;
-  }
-  
-  .center { order: 1; } /* El texto y el juego aparecen primero */
-  
+  .container { display: flex; flex-direction: column; }
+  .center { order: 1; }
   .side { 
-    order: 2; /* Las fotos se mueven abajo del contenido */
+    order: 2; 
     display: flex; 
     flex-direction: row; 
     flex-wrap: wrap; 
@@ -169,19 +125,11 @@ iframe {
     margin-top: 40px;
     height: auto;
   }
-
   .side img {
-    position: relative; /* Cambiamos a relativo para que se vean una al lado de la otra */
-    left: auto;
-    top: auto !important;
-    transform: none;
-    width: 110px; /* Tamaño más pequeño para que entren en el celular */
-    height: 150px;
-    opacity: 0;
-    animation: floatFadeMobile 6s infinite ease-in-out;
+    position: relative; left: auto; top: auto !important; transform: none;
+    width: 100px; height: 140px; opacity: 0; animation: floatMobile 6s infinite ease-in-out;
   }
-
-  @keyframes floatFadeMobile {
+  @keyframes floatMobile {
     0%, 100% { opacity: 0; transform: translateY(10px); }
     50% { opacity: 1; transform: translateY(0); }
   }
@@ -204,34 +152,30 @@ for (let i = 0; i < 25; i++) {
 </script>
 
 <div class="container">
-
-<div class="side">
+  <div class="side">
     <img src="foto1.png">
     <img src="foto2.png">
   </div>
 
   <div class="center">
     <h1>only one</h1>
-
     <p>Entre todas las vidas posibles,<br>te elijo a vos.</p>
-
     <div class="symbols">✧ ☽ ♡ ✦</div>
 
     <button class="music-button" onclick="mostrarPlaylist()">▶ tocar música</button>
 
     <div id="playlist" style="display:none;">
-      <iframe src="https://open.spotify.com/embed/playlist/1Wen8asxcrGMps2lgGh9Q7"
-        width="300" height="380"></iframe>
+      <iframe style="border-radius:12px" src="https://open.spotify.com/playlist/1Wen8asxcrGMps2lgGh9Q7?si=r8RjDJnrSTu7KSDKYdfB0Q&pi=VU5Fd6fqRLipg" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
     <div class="timeline">
       <p>✧ 8 de diciembre de 2019<br>empezamos a salir</p>
-      <p>♡ con el tiempo<br>nos elegimos</p>
-      <p>☽ hoy<br>sos mi hogar</p>
+      <p>♡ con el tiempo nos elegimos</p>
+      <p>☽ hoy sos mi hogar</p>
     </div>
   </div>
 
-<div class="side">
+  <div class="side">
     <img src="foto3.png">
     <img src="foto4.png">
     <img src="foto5.png">
@@ -240,27 +184,14 @@ for (let i = 0; i < 25; i++) {
 
 <div class="game-section">
   <h2>un pequeño juego para vos ♡</h2>
-  <p>juntá corazones y desbloqueá tu premio</p>
-
-  <div id="ui">
-    ❤️ Amor recolectado: <span id="score">0</span>
-    <div id="reward-text" class="reward">saltá para empezar</div>
-  </div>
-
+  <div id="ui">❤️ Amor: <span id="score">0</span></div>
   <div id="game-container" onclick="jump()">
     <div id="player"></div>
   </div>
-
-  <p style="font-size:.8em; opacity:.6">tocá la pantalla o espacio para saltar</p>
 </div>
 
 <script>
 let score = 0, isJumping = false, position = 0;
-const player = document.getElementById('player');
-const container = document.getElementById('game-container');
-const scoreElement = document.getElementById('score');
-const rewardText = document.getElementById('reward-text');
-
 function jump() {
   if (isJumping) return;
   isJumping = true;
@@ -268,16 +199,13 @@ function jump() {
     if (position >= 110) {
       clearInterval(up);
       let down = setInterval(() => {
-        if (position <= 0) {
-          clearInterval(down);
-          isJumping = false;
-        }
+        if (position <= 0) { clearInterval(down); isJumping = false; }
         position -= 5;
-        player.style.bottom = position + 'px';
+        document.getElementById('player').style.bottom = position + 'px';
       }, 20);
     }
     position += 5;
-    player.style.bottom = position + 'px';
+    document.getElementById('player').style.bottom = position + 'px';
   }, 20);
 }
 
@@ -287,32 +215,20 @@ function createHeart() {
   heart.innerHTML = '💖';
   heart.style.left = '360px';
   heart.style.bottom = Math.random() * 100 + 20 + 'px';
-  container.appendChild(heart);
-
+  document.getElementById('game-container').appendChild(heart);
   let move = setInterval(() => {
     let x = parseInt(heart.style.left);
     if (x < 80 && x > 50 && position + 30 > parseInt(heart.style.bottom)) {
       score++;
-      scoreElement.innerText = score;
-      if (score >= 15) rewardText.innerText = "🏆 premio desbloqueado: un abrazo eterno";
-      else if (score >= 5) rewardText.innerText = "💋 premio: un beso infinito";
-      heart.remove();
-      clearInterval(move);
+      document.getElementById('score').innerText = score;
+      heart.remove(); clearInterval(move);
     }
     heart.style.left = x - 4 + 'px';
-    if (x < -20) {
-      heart.remove();
-      clearInterval(move);
-    }
+    if (x < -20) { heart.remove(); clearInterval(move); }
   }, 20);
 }
-
 setInterval(createHeart, 1500);
-document.addEventListener('keydown', e => e.code === 'Space' && jump());
-
-function mostrarPlaylist() {
-  document.getElementById("playlist").style.display = "block";
-}
+function mostrarPlaylist() { document.getElementById("playlist").style.display = "block"; }
 </script>
 
 </body>
