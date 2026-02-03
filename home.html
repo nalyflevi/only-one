@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>only one ✧</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #ffffff;
+  color: #3b3b3b;
+  overflow-x: hidden;
+}
+
+/* ✦ ESTRELLAS */
+.star {
+  position: fixed;
+  color: #f5e39a;
+  font-size: 14px;
+  opacity: 0;
+  animation: twinkle 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* LAYOUT */
+.container {
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 520px) 1fr;
+  padding: 50px 20px;
+}
+
+.side {
+  position: relative;
+}
+
+.side img {
+  width: 160px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  opacity: 0;
+  animation: floatFade 12s infinite ease-in-out;
+}
+
+.side img:nth-child(1) { animation-delay: 0s; top: 20px; }
+.side img:nth-child(2) { animation-delay: 4s; top: 260px; }
+.side img:nth-child(3) { animation-delay: 8s; top: 500px; }
+
+@keyframes floatFade {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -40px); }
+}
+
+.center {
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  color: #486b5a;
+}
+
+.symbols {
+  font-size: 1.4em;
+  margin: 25px 0;
+  opacity: 0.7;
+}
+
+.music-button {
+  margin: 25px 0;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #f2b6cd, #cce5d8);
+  border: none;
+  border-radius: 35px;
+  cursor: pointer;
+  color: #355f50;
+}
+
+iframe {
+  margin-top: 30px;
+  border-radius: 14px;
+}
+
+.timeline {
+  margin: 60px auto;
+  max-width: 460px;
+  background: rgba(245,245,245,0.9);
+  padding: 30px;
+  border-radius: 25px;
+}
+
+/* 🎮 JUEGO */
+.game-section {
+  margin: 80px auto;
+  text-align: center;
+}
+
+#game-container {
+  width: 360px;
+  height: 260px;
+  margin: 20px auto;
+  background: #fff;
+  border: 3px solid #f2b6cd;
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+#player {
+  position: absolute;
+  bottom: 0;
+  left: 60px;
+  width: 30px;
+  height: 30px;
+  background: #f8bbd0;
+  border-radius: 6px;
+}
+
+.heart {
+  position: absolute;
+  font-size: 20px;
+}
+
+#ui {
+  margin-top: 10px;
+}
+
+.reward {
+  font-weight: bold;
+  color: #d81b60;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .container { grid-template-columns: 1fr; }
+  .side { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<script>
+for (let i = 0; i < 25; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.innerHTML = "✦";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.animationDelay = Math.random() * 4 + "s";
+  document.body.appendChild(star);
+}
+</script>
+
+<div class="container">
+
+<div class="side">
+    <img src="foto1.png">
+    <img src="foto2.png">
+  </div>
+
+  <div class="center">
+    <h1>only one</h1>
+
+    <p>Entre todas las vidas posibles,<br>te elijo a vos.</p>
+
+    <div class="symbols">✧ ☽ ♡ ✦</div>
+
+    <button class="music-button" onclick="mostrarPlaylist()">▶ tocar música</button>
+
+    <div id="playlist" style="display:none;">
+      <iframe src="https://open.spotify.com/embed/playlist/1Wen8asxcrGMps2lgGh9Q7"
+        width="300" height="380"></iframe>
+    </div>
+
+    <div class="timeline">
+      <p>✧ 8 de diciembre de 2019<br>empezamos a salir</p>
+      <p>♡ con el tiempo<br>nos elegimos</p>
+      <p>☽ hoy<br>sos mi hogar</p>
+    </div>
+  </div>
+
+<div class="side">
+    <img src="foto3.png">
+    <img src="foto4.png">
+    <img src="foto5.png">
+  </div>
+</div>
+
+<!-- 🎮 JUEGO -->
+<div class="game-section">
+  <h2>un pequeño juego para vos ♡</h2>
+  <p>juntá corazones y desbloqueá tu premio</p>
+
+  <div id="ui">
+    ❤️ Amor recolectado: <span id="score">0</span>
+    <div id="reward-text" class="reward">saltá para empezar</div>
+  </div>
+
+  <div id="game-container" onclick="jump()">
+    <div id="player"></div>
+  </div>
+
+  <p style="font-size:.8em; opacity:.6">tocá la pantalla o espacio para saltar</p>
+</div>
+
+<script>
+let score = 0, isJumping = false, position = 0;
+const player = document.getElementById('player');
+const container = document.getElementById('game-container');
+const scoreElement = document.getElementById('score');
+const rewardText = document.getElementById('reward-text');
+
+function jump() {
+  if (isJumping) return;
+  isJumping = true;
+  let up = setInterval(() => {
+    if (position >= 110) {
+      clearInterval(up);
+      let down = setInterval(() => {
+        if (position <= 0) {
+          clearInterval(down);
+          isJumping = false;
+        }
+        position -= 5;
+        player.style.bottom = position + 'px';
+      }, 20);
+    }
+    position += 5;
+    player.style.bottom = position + 'px';
+  }, 20);
+}
+
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerHTML = '💖';
+  heart.style.left = '360px';
+  heart.style.bottom = Math.random() * 100 + 20 + 'px';
+  container.appendChild(heart);
+
+  let move = setInterval(() => {
+    let x = parseInt(heart.style.left);
+    if (x < 80 && x > 50 && position + 30 > parseInt(heart.style.bottom)) {
+      score++;
+      scoreElement.innerText = score;
+      if (score >= 15) rewardText.innerText = "🏆 premio desbloqueado: un abrazo eterno";
+      else if (score >= 5) rewardText.innerText = "💋 premio: un beso infinito";
+      heart.remove();
+      clearInterval(move);
+    }
+    heart.style.left = x - 4 + 'px';
+    if (x < -20) {
+      heart.remove();
+      clearInterval(move);
+    }
+  }, 20);
+}
+
+setInterval(createHeart, 1500);
+document.addEventListener('keydown', e => e.code === 'Space' && jump());
+
+function mostrarPlaylist() {
+  document.getElementById("playlist").style.display = "block";
+}
+</script>
+
+</body>
+</html>

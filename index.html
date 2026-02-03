@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para vos</title>
+
+<style>
+:root {
+  --verde-pastel: #e2efde;
+  --verde-fuerte: #a8c69f;
+  --rosa-pastel: #fce4ec;
+  --rosa-acento: #f8bbd0;
+  --blanco: #ffffff;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, var(--verde-pastel), var(--rosa-pastel));
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.envelope-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.envelope {
+  position: relative;
+  width: 260px;
+  height: 160px;
+  background-color: var(--rosa-acento);
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.letter {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 85%;
+  background: var(--blanco);
+  border-radius: 6px;
+  padding: 15px;
+  box-sizing: border-box;
+  transition: transform 0.8s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.letter div {
+  height: 8px;
+  background: var(--verde-pastel);
+  border-radius: 3px;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 130px solid transparent;
+  border-right: 130px solid transparent;
+  border-top: 90px solid var(--rosa-acento);
+  transform-origin: top;
+  transition: transform 0.8s ease;
+  z-index: 3;
+}
+
+.envelope-wrapper.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope-wrapper.open .letter {
+  transform: translateY(-90px);
+}
+
+.hint {
+  position: absolute;
+  top: -40px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9em;
+  color: #6a8f7a;
+  letter-spacing: 1px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope-wrapper" onclick="openLetter()">
+  <div class="hint">toca para abrir ✧</div>
+
+  <div class="flap"></div>
+  <div class="envelope">
+    <div class="letter">
+      <div style="width: 50%; background: var(--verde-fuerte);"></div>
+      <div style="width: 90%;"></div>
+      <div style="width: 80%;"></div>
+      <div style="width: 60%;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openLetter() {
+  const envelope = document.querySelector('.envelope-wrapper');
+  envelope.classList.add('open');
+
+  setTimeout(() => {
+    window.location.href = "home.html";
+  }, 1200);
+}
+</script>
+
+</body>
+</html>
