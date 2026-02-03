@@ -407,4 +407,72 @@ function mostrarPlaylist() {
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Only One ✧</title>
+<style>
+    body { margin: 0; font-family: 'Poppins', sans-serif; background: #ffffff; text-align: center; overflow-x: hidden; }
+    .container { display: grid; grid-template-columns: 1fr minmax(300px, 500px) 1fr; gap: 20px; padding: 40px 10px; }
+    
+    /* ANIMACIÓN FADE */
+    @keyframes fadeEffect {
+        0%, 100% { opacity: 0; transform: scale(0.9); }
+        30%, 70% { opacity: 1; transform: scale(1); }
+    }
+
+    .side { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .side img { 
+        width: 150px; height: 200px; object-fit: cover; border-radius: 15px; 
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+        animation: fadeEffect 6s infinite ease-in-out; opacity: 0;
+    }
+
+    /* Tiempos diferentes para cada foto */
+    .side img:nth-child(1) { animation-delay: 0s; }
+    .side img:nth-child(2) { animation-delay: 2s; }
+    .side img:nth-child(3) { animation-delay: 4s; }
+
+    @media (max-width: 800px) {
+        .container { grid-template-columns: 1fr; }
+        .side { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+        .side img { width: 130px; height: 170px; }
+    }
+
+    #game-container { width: 300px; height: 180px; margin: 20px auto; border: 3px solid #f2b6cd; border-radius: 15px; position: relative; overflow: hidden; background: #fff; }
+    #player { position: absolute; bottom: 0; left: 40px; width: 30px; height: 30px; background: #f8bbd0; border-radius: 5px; }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="side"><img src="foto1.png"><img src="foto2.png"></div>
+        <div class="center">
+            <h1 style="color:#486b5a">only one</h1>
+            <div id="game-container" onclick="jump()">
+                <div id="player"></div>
+            </div>
+            <p>Puntos: <span id="score">0</span></p>
+        </div>
+        <div class="side"><img src="foto3.png"><img src="foto4.png"></div>
+    </div>
+    <script>
+        let pos = 0;
+        function jump() {
+            if (pos > 0) return;
+            let up = setInterval(() => {
+                if (pos >= 80) {
+                    clearInterval(up);
+                    let down = setInterval(() => {
+                        if (pos <= 0) clearInterval(down);
+                        pos -= 4; document.getElementById('player').style.bottom = pos + 'px';
+                    }, 20);
+                }
+                pos += 4; document.getElementById('player').style.bottom = pos + 'px';
+            }, 20);
+        }
+    </script>
+</body>
+</html>
 
