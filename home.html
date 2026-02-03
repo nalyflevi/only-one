@@ -283,3 +283,128 @@ function mostrarPlaylist() {
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home - Only One</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #ffffff;
+        text-align: center;
+        overflow-x: hidden;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 1fr minmax(300px, 500px) 1fr;
+        gap: 20px;
+        padding: 50px 20px;
+    }
+
+    /* --- ANIMACIÓN DE APARECER Y DESAPARECER --- */
+    @keyframes fadeEffect {
+        0%, 100% { opacity: 0; transform: translateY(10px); }
+        20%, 80% { opacity: 1; transform: translateY(0); }
+    }
+
+    .side img {
+        width: 160px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        
+        /* Aplicamos la animación */
+        opacity: 0;
+        animation: fadeEffect 8s infinite ease-in-out;
+    }
+
+    /* Diferentes tiempos para que no aparezcan todas a la vez */
+    .side img:nth-child(1) { animation-delay: 0s; }
+    .side img:nth-child(2) { animation-delay: 2s; }
+    .side img:nth-child(3) { animation-delay: 4s; }
+
+    /* --- DISEÑO MÓVIL --- */
+    @media (max-width: 800px) {
+        .container {
+            grid-template-columns: 1fr;
+            padding: 20px;
+        }
+
+        .side {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .side img {
+            width: 120px; /* Más pequeñas en el cel */
+            height: 160px;
+        }
+    }
+
+    /* Estilos del centro y juego */
+    .center { padding: 20px; }
+    #game-container { 
+        width: 100%; max-width: 340px; height: 200px; 
+        margin: 20px auto; border: 3px solid #f2b6cd; border-radius: 15px; 
+        position: relative; overflow: hidden; background: #fff;
+    }
+    #player { position: absolute; bottom: 0; left: 50px; width: 30px; height: 30px; background: #f8bbd0; border-radius: 5px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="side">
+        <img src="foto1.png">
+        <img src="foto2.png">
+    </div>
+
+    <div class="center">
+        <h1>only one</h1>
+        <p>Cada momento con vos es especial.</p>
+        
+        <div id="game-container" onclick="jump()">
+            <div id="player"></div>
+        </div>
+        <p>❤️ Score: <span id="score">0</span></p>
+    </div>
+
+    <div class="side">
+        <img src="foto3.png">
+        <img src="foto4.png">
+        <img src="foto5.png">
+    </div>
+</div>
+
+<script>
+    // Tu lógica de salto del juego
+    let position = 0;
+    function jump() {
+        if (position > 0) return;
+        let up = setInterval(() => {
+            if (position >= 100) {
+                clearInterval(up);
+                let down = setInterval(() => {
+                    if (position <= 0) { clearInterval(down); }
+                    position -= 5;
+                    document.getElementById('player').style.bottom = position + 'px';
+                }, 20);
+            }
+            position += 5;
+            document.getElementById('player').style.bottom = position + 'px';
+        }, 20);
+    }
+    // (Aquí puedes pegar el resto de tu lógica de corazones)
+</script>
+
+</body>
+</html>
+
