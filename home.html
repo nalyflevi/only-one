@@ -66,90 +66,42 @@ body {
   100% { opacity: 0; transform: translate(-50%, -40px); }
 }
 
-.center {
-  text-align: center;
-}
-
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  color: #486b5a;
-}
-
-.symbols {
-  font-size: 1.4em;
-  margin: 25px 0;
-  opacity: 0.7;
-}
+.center { text-align: center; }
+h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #486b5a; margin-top: 20px; }
+.symbols { font-size: 1.4em; margin: 20px 0; opacity: 0.7; }
 
 .music-button {
-  margin: 25px 0;
+  margin: 20px 0;
   padding: 14px 32px;
   background: linear-gradient(135deg, #f2b6cd, #cce5d8);
   border: none;
   border-radius: 35px;
   cursor: pointer;
   color: #355f50;
+  font-weight: bold;
+}
+
+/* REPRODUCTOR ESTILO CAPTURA */
+#playlist {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 iframe {
-  margin-top: 30px;
-  border-radius: 14px;
-  max-width: 100%; /* Ajuste para que no se salga de la pantalla */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .timeline {
-  margin: 60px auto;
+  margin: 40px auto;
   max-width: 460px;
   background: rgba(245,245,245,0.9);
   padding: 30px;
   border-radius: 25px;
 }
 
-/* 🎮 JUEGO */
-.game-section {
-  margin: 80px auto;
-  text-align: center;
-}
-
-#game-container {
-  width: 360px;
-  max-width: 90%; /* Ajuste para celular */
-  height: 260px;
-  margin: 20px auto;
-  background: #fff;
-  border: 3px solid #f2b6cd;
-  border-radius: 18px;
-  position: relative;
-  overflow: hidden;
-}
-
-#player {
-  position: absolute;
-  bottom: 0;
-  left: 60px;
-  width: 30px;
-  height: 30px;
-  background: #f8bbd0;
-  border-radius: 6px;
-}
-
-.heart {
-  position: absolute;
-  font-size: 20px;
-}
-
-#ui {
-  margin-top: 10px;
-}
-
-.reward {
-  font-weight: bold;
-  color: #d81b60;
-  margin-top: 8px;
-}
-
-/* --- ESTA ES LA PARTE QUE ARREGLA EL CELULAR SIN BORRAR NADA --- */
+/* MEDIA QUERY PARA CELULAR */
 @media (max-width: 900px) {
   .container { display: flex; flex-direction: column; }
   .center { order: 1; }
@@ -158,25 +110,17 @@ iframe {
     display: flex; 
     flex-wrap: wrap; 
     justify-content: center; 
-    gap: 15px;
-    position: relative;
-    height: auto;
+    gap: 15px; 
     margin-top: 30px;
+    height: auto;
   }
   .side img {
-    position: relative;
-    left: auto;
-    transform: none;
-    width: 120px;
-    height: 160px;
-    opacity: 1;
-    top: auto !important;
-    animation: none; /* Quitamos la animación compleja en cel para que se vean fijas */
+    position: relative; left: auto; top: auto !important; transform: none;
+    width: 130px; height: 170px; opacity: 1; animation: none;
   }
 }
 </style>
 </head>
-
 <body>
 
 <script>
@@ -192,109 +136,44 @@ for (let i = 0; i < 25; i++) {
 </script>
 
 <div class="container">
-
-<div class="side">
+  <div class="side">
     <img src="foto1.png">
     <img src="foto2.png">
   </div>
 
   <div class="center">
     <h1>only one</h1>
-
     <p>Entre todas las vidas posibles,<br>te elijo a vos.</p>
-
     <div class="symbols">✧ ☽ ♡ ✦</div>
 
     <button class="music-button" onclick="mostrarPlaylist()">▶ tocar música</button>
 
     <div id="playlist" style="display:none;">
-      <iframe src="https://open.spotify.com/playlist/1Wen8asxcrGMps2lgGh9Q7?si=r8RjDJnrSTu7KSDKYdfB0Q&pi=VU5Fd6fqRLipg" 
-      width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1E8O6p9S9kR5K3" 
+              width="300" 
+              height="380" 
+              frameborder="0" 
+              allowtransparency="true" 
+              allow="encrypted-media"></iframe>
     </div>
 
     <div class="timeline">
       <p>✧ 8 de diciembre de 2019<br>empezamos a salir</p>
-      <p>♡ con el tiempo<br>nos elegimos</p>
-      <p>☽ hoy<br>sos mi hogar</p>
+      <p>♡ con el tiempo nos elegimos</p>
+      <p>☽ hoy sos mi hogar</p>
     </div>
   </div>
 
-<div class="side">
+  <div class="side">
     <img src="foto3.png">
     <img src="foto4.png">
     <img src="foto5.png">
   </div>
 </div>
 
-<div class="game-section">
-  <h2>un pequeño juego para vos ♡</h2>
-  <div id="ui">
-    ❤️ Amor recolectado: <span id="score">0</span>
-    <div id="reward-text" class="reward">saltá para empezar</div>
-  </div>
-  <div id="game-container" onclick="jump()">
-    <div id="player"></div>
-  </div>
-</div>
-
 <script>
-let score = 0, isJumping = false, position = 0;
-const player = document.getElementById('player');
-const container = document.getElementById('game-container');
-const scoreElement = document.getElementById('score');
-const rewardText = document.getElementById('reward-text');
-
-function jump() {
-  if (isJumping) return;
-  isJumping = true;
-  let up = setInterval(() => {
-    if (position >= 110) {
-      clearInterval(up);
-      let down = setInterval(() => {
-        if (position <= 0) {
-          clearInterval(down);
-          isJumping = false;
-        }
-        position -= 5;
-        player.style.bottom = position + 'px';
-      }, 20);
-    }
-    position += 5;
-    player.style.bottom = position + 'px';
-  }, 20);
-}
-
-function createHeart() {
-  const heart = document.createElement('div');
-  heart.className = 'heart';
-  heart.innerHTML = '💖';
-  heart.style.left = '360px';
-  heart.style.bottom = Math.random() * 100 + 20 + 'px';
-  container.appendChild(heart);
-
-  let move = setInterval(() => {
-    let x = parseInt(heart.style.left);
-    if (x < 80 && x > 50 && position + 30 > parseInt(heart.style.bottom)) {
-      score++;
-      scoreElement.innerText = score;
-      if (score >= 15) rewardText.innerText = "🏆 premio desbloqueado: un abrazo eterno";
-      else if (score >= 5) rewardText.innerText = "💋 premio: un beso infinito";
-      heart.remove();
-      clearInterval(move);
-    }
-    heart.style.left = x - 4 + 'px';
-    if (x < -20) {
-      heart.remove();
-      clearInterval(move);
-    }
-  }, 20);
-}
-
-setInterval(createHeart, 1500);
-document.addEventListener('keydown', e => e.code === 'Space' && jump());
-
 function mostrarPlaylist() {
-  document.getElementById("playlist").style.display = "block";
+  document.getElementById("playlist").style.display = "flex";
 }
 </script>
 
