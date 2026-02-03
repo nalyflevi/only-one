@@ -31,7 +31,7 @@ body {
   50% { opacity: 1; }
 }
 
-/* LAYOUT */
+/* LAYOUT PC */
 .container {
   display: grid;
   grid-template-columns: 1fr minmax(280px, 520px) 1fr;
@@ -66,52 +66,39 @@ body {
   100% { opacity: 0; transform: translate(-50%, -40px); }
 }
 
-.center {
-  text-align: center;
+.center { text-align: center; }
+h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #486b5a; margin-bottom: 10px; }
+.symbols { font-size: 1.4em; margin: 25px 0; opacity: 0.7; }
+
+.music-button { 
+  margin: 25px 0; 
+  padding: 14px 32px; 
+  background: linear-gradient(135deg, #f2b6cd, #cce5d8); 
+  border: none; 
+  border-radius: 35px; 
+  cursor: pointer; 
+  color: #355f50; 
+  font-weight: bold;
 }
 
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  color: #486b5a;
-}
-
-.symbols {
-  font-size: 1.4em;
-  margin: 25px 0;
-  opacity: 0.7;
-}
-
-.music-button {
-  margin: 25px 0;
-  padding: 14px 32px;
-  background: linear-gradient(135deg, #f2b6cd, #cce5d8);
-  border: none;
-  border-radius: 35px;
-  cursor: pointer;
-  color: #355f50;
-}
-
-iframe {
-  margin-top: 30px;
-  border-radius: 14px;
-  max-width: 100%; /* Para que no se corte en el cel */
+/* CONTENEDOR SPOTIFY CORREGIDO */
+#playlist {
+  display: none;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 300px;
+  min-height: 80px; /* Asegura que el espacio exista */
 }
 
 .timeline {
-  margin: 60px auto;
+  margin: 40px auto;
   max-width: 460px;
   background: rgba(245,245,245,0.9);
   padding: 30px;
   border-radius: 25px;
 }
 
-/* 🎮 JUEGO */
-.game-section {
-  margin: 80px auto;
-  text-align: center;
-}
-
+/* JUEGO */
 #game-container {
   width: 360px;
   max-width: 95%;
@@ -134,22 +121,14 @@ iframe {
   border-radius: 6px;
 }
 
-.heart {
-  position: absolute;
-  font-size: 20px;
-}
+.heart { position: absolute; font-size: 20px; }
 
 /* REORDENAR PARA CELULAR */
 @media (max-width: 900px) {
-  .container { 
-    display: flex; 
-    flex-direction: column; 
-  }
-  
-  .center { order: 1; } /* El texto y música van arriba */
-  
+  .container { display: flex; flex-direction: column; }
+  .center { order: 1; }
   .side { 
-    order: 2; /* Las fotos se van abajo */
+    order: 2; 
     display: flex; 
     flex-direction: row; 
     flex-wrap: wrap; 
@@ -158,17 +137,10 @@ iframe {
     margin-top: 30px;
     height: auto;
   }
-
   .side img {
-    position: relative; 
-    left: auto;
-    top: auto !important;
-    transform: none;
-    width: 100px; /* Más pequeñas en cel */
-    height: 140px;
-    animation: floatFadeSimple 6s infinite ease-in-out;
+    position: relative; left: auto; top: auto !important; transform: none;
+    width: 100px; height: 140px; animation: floatFadeSimple 6s infinite ease-in-out;
   }
-
   @keyframes floatFadeSimple {
     0%, 100% { opacity: 0; transform: translateY(10px); }
     50% { opacity: 1; transform: translateY(0); }
@@ -176,7 +148,6 @@ iframe {
 }
 </style>
 </head>
-
 <body>
 
 <script>
@@ -201,16 +172,17 @@ for (let i = 0; i < 25; i++) {
     <h1>only one</h1>
     <p>Entre todas las vidas posibles,<br>te elijo a vos.</p>
     <div class="symbols">✧ ☽ ♡ ✦</div>
+    
     <button class="music-button" onclick="mostrarPlaylist()">▶ tocar música</button>
 
-    <div id="playlist" style="display:none;">
-      <iframe style="border-radius:12px" src="http://googleusercontent.com/spotify.com/6" width="300" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div id="playlist">
+      <iframe src="http://googleusercontent.com/spotify.com/7" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>
     </div>
 
     <div class="timeline">
       <p>✧ 8 de diciembre de 2019<br>empezamos a salir</p>
-      <p>♡ con el tiempo<br>nos elegimos</p>
-      <p>☽ hoy<br>sos mi hogar</p>
+      <p>♡ con el tiempo nos elegimos</p>
+      <p>☽ hoy sos mi hogar</p>
     </div>
   </div>
 
@@ -221,12 +193,9 @@ for (let i = 0; i < 25; i++) {
   </div>
 </div>
 
-<div class="game-section">
+<div class="center" style="padding-bottom:100px;">
   <h2>un pequeño juego para vos ♡</h2>
-  <div id="ui">
-    ❤️ Amor recolectado: <span id="score">0</span>
-    <div id="reward-text" style="font-weight:bold; color:#d81b60; margin-top:8px;">saltá para empezar</div>
-  </div>
+  <div id="ui">❤️ Amor: <span id="score">0</span></div>
   <div id="game-container" onclick="jump()">
     <div id="player"></div>
   </div>
@@ -234,11 +203,6 @@ for (let i = 0; i < 25; i++) {
 
 <script>
 let score = 0, isJumping = false, position = 0;
-const player = document.getElementById('player');
-const container = document.getElementById('game-container');
-const scoreElement = document.getElementById('score');
-const rewardText = document.getElementById('reward-text');
-
 function jump() {
   if (isJumping) return;
   isJumping = true;
@@ -248,11 +212,11 @@ function jump() {
       let down = setInterval(() => {
         if (position <= 0) { clearInterval(down); isJumping = false; }
         position -= 5;
-        player.style.bottom = position + 'px';
+        document.getElementById('player').style.bottom = position + 'px';
       }, 20);
     }
     position += 5;
-    player.style.bottom = position + 'px';
+    document.getElementById('player').style.bottom = position + 'px';
   }, 20);
 }
 
@@ -262,23 +226,23 @@ function createHeart() {
   heart.innerHTML = '💖';
   heart.style.left = '360px';
   heart.style.bottom = Math.random() * 100 + 20 + 'px';
-  container.appendChild(heart);
+  document.getElementById('game-container').appendChild(heart);
   let move = setInterval(() => {
     let x = parseInt(heart.style.left);
     if (x < 80 && x > 50 && position + 30 > parseInt(heart.style.bottom)) {
       score++;
-      scoreElement.innerText = score;
-      if (score >= 15) rewardText.innerText = "🏆 premio desbloqueado: un abrazo eterno";
-      else if (score >= 5) rewardText.innerText = "💋 premio: un beso infinito";
+      document.getElementById('score').innerText = score;
       heart.remove(); clearInterval(move);
     }
     heart.style.left = x - 4 + 'px';
     if (x < -20) { heart.remove(); clearInterval(move); }
   }, 20);
 }
+setInterval(createHeart, 2000);
 
-setInterval(createHeart, 1500);
-function mostrarPlaylist() { document.getElementById("playlist").style.display = "block"; }
+function mostrarPlaylist() {
+  document.getElementById("playlist").style.display = "block";
+}
 </script>
 
 </body>
