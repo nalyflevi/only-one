@@ -9,286 +9,232 @@
 
 <style>
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #ffffff;
-    color: #3b3b3b;
-    overflow-x: hidden;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #ffffff;
+  color: #3b3b3b;
+  overflow-x: hidden;
 }
 
 /* ✦ ESTRELLAS */
 .star {
-    position: fixed;
-    color: #f5e39a;
-    font-size: 14px;
-    opacity: 0;
-    animation: twinkle 4s infinite ease-in-out;
-    pointer-events: none;
+  position: fixed;
+  color: #f5e39a;
+  font-size: 14px;
+  opacity: 0;
+  animation: twinkle 4s infinite ease-in-out;
+  pointer-events: none;
 }
 
 @keyframes twinkle {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 1; }
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
 }
 
-/* LAYOUT GENERAL */
+/* LAYOUT PC */
 .container {
-    display: grid;
-    grid-template-columns: 1fr minmax(280px, 520px) 1fr;
-    padding: 50px 20px;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 520px) 1fr;
+  padding: 50px 20px;
 }
 
-.center {
-    text-align: center;
-    z-index: 10;
-}
-
-/* FOTOS (SIDE) */
 .side {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  position: relative;
 }
 
 .side img {
-    width: 160px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    opacity: 0;
-    animation: floatFade 8s infinite ease-in-out;
+  width: 160px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  opacity: 0;
+  animation: floatFade 12s infinite ease-in-out;
 }
 
-/* Tiempos de animación para PC */
-.side img:nth-child(1) { animation-delay: 0s; }
-.side img:nth-child(2) { animation-delay: 2.5s; }
-.side img:nth-child(3) { animation-delay: 5s; }
+.side img:nth-child(1) { animation-delay: 0s; top: 20px; }
+.side img:nth-child(2) { animation-delay: 4s; top: 260px; }
+.side img:nth-child(3) { animation-delay: 8s; top: 500px; }
 
 @keyframes floatFade {
-    0% { opacity: 0; transform: translateY(20px); }
-    30% { opacity: 1; transform: translateY(0px); }
-    70% { opacity: 1; transform: translateY(0px); }
-    100% { opacity: 0; transform: translateY(-20px); }
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -40px); }
 }
 
-/* TEXTOS */
-h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3em;
-    color: #486b5a;
-    margin-bottom: 10px;
-}
+.center { text-align: center; }
+h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #486b5a; }
+.symbols { font-size: 1.4em; margin: 25px 0; opacity: 0.7; }
+.music-button { margin: 25px 0; padding: 14px 32px; background: linear-gradient(135deg, #f2b6cd, #cce5d8); border: none; border-radius: 35px; cursor: pointer; color: #355f50; }
 
-.symbols {
-    font-size: 1.4em;
-    margin: 25px 0;
-    opacity: 0.7;
-}
-
-.music-button {
-    margin: 25px 0;
-    padding: 14px 32px;
-    background: linear-gradient(135deg, #f2b6cd, #cce5d8);
-    border: none;
-    border-radius: 35px;
-    cursor: pointer;
-    color: #355f50;
-    font-weight: bold;
+/* REPRODUCTOR SPOTIFY CORREGIDO */
+#playlist iframe {
+  max-width: 100%; /* Evita que se vea corrido en el celular */
+  border-radius: 14px;
 }
 
 .timeline {
-    margin: 40px auto;
-    max-width: 400px;
-    background: rgba(245,245,245,0.7);
-    padding: 20px;
-    border-radius: 20px;
-    font-size: 0.9em;
+  margin: 60px auto;
+  max-width: 460px;
+  background: rgba(245,245,245,0.9);
+  padding: 30px;
+  border-radius: 25px;
 }
 
 /* 🎮 JUEGO */
-.game-section {
-    margin: 50px auto;
-    text-align: center;
-    padding-bottom: 100px;
-}
-
 #game-container {
-    width: 320px;
-    height: 220px;
-    margin: 20px auto;
-    background: #fff;
-    border: 3px solid #f2b6cd;
-    border-radius: 18px;
-    position: relative;
-    overflow: hidden;
-    touch-action: manipulation; /* Mejora el toque en cel */
+  width: 360px;
+  max-width: 95%; /* Para que entre en el cel */
+  height: 260px;
+  margin: 20px auto;
+  background: #fff;
+  border: 3px solid #f2b6cd;
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
 }
 
 #player {
-    position: absolute;
-    bottom: 0;
-    left: 50px;
-    width: 30px;
-    height: 30px;
-    background: #f8bbd0;
-    border-radius: 6px;
+  position: absolute;
+  bottom: 0;
+  left: 60px;
+  width: 30px;
+  height: 30px;
+  background: #f8bbd0;
+  border-radius: 6px;
 }
 
 .heart { position: absolute; font-size: 20px; }
-.reward { font-weight: bold; color: #d81b60; margin-top: 8px; }
 
-/* 📱 AJUSTES PARA CELULAR */
+/* --- SOLO CORRECCIÓN CELULAR --- */
 @media (max-width: 900px) {
-    .container {
-        display: flex;
-        flex-direction: column;
-        padding: 20px 15px;
-    }
+  .container { 
+    display: flex; 
+    flex-direction: column; 
+  }
+  
+  .center { order: 1; } /* Texto arriba */
+  
+  .side { 
+    order: 2; /* Fotos abajo */
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 10px; 
+    margin-top: 30px;
+    height: auto;
+  }
 
-    .center {
-        order: 1; /* El texto va primero */
-    }
+  .side img {
+    position: relative; /* Ya no flotan una encima de otra en cel */
+    left: auto;
+    top: auto !important;
+    transform: none;
+    width: 100px; /* Más pequeñas */
+    height: 140px;
+    animation: floatFadeSimple 6s infinite ease-in-out;
+  }
 
-    .side {
-        order: 2; /* Las fotos se van para abajo */
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 30px;
-        gap: 10px;
-    }
-
-    .side img {
-        width: 100px; /* Fotos más pequeñas en cel */
-        height: 140px;
-        animation: floatFadeMobile 6s infinite ease-in-out;
-    }
-
-    h1 { font-size: 2.2em; }
-    
-    @keyframes floatFadeMobile {
-        0% { opacity: 0; transform: translateY(10px); }
-        50% { opacity: 1; transform: translateY(0); }
-        100% { opacity: 0; transform: translateY(-10px); }
-    }
+  @keyframes floatFadeSimple {
+    0%, 100% { opacity: 0; transform: translateY(10px); }
+    50% { opacity: 1; transform: translateY(0); }
+  }
 }
 </style>
 </head>
-
 <body>
 
 <script>
-// Generar estrellas
-for (let i = 0; i < 20; i++) {
-    const star = document.createElement("div");
-    star.className = "star";
-    star.innerHTML = "✦";
-    star.style.left = Math.random() * 100 + "vw";
-    star.style.top = Math.random() * 100 + "vh";
-    star.style.animationDelay = Math.random() * 4 + "s";
-    document.body.appendChild(star);
+for (let i = 0; i < 25; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.innerHTML = "✦";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.animationDelay = Math.random() * 4 + "s";
+  document.body.appendChild(star);
 }
 </script>
 
 <div class="container">
-    <div class="side">
-        <img src="foto1.png">
-        <img src="foto2.png">
+  <div class="side">
+    <img src="foto1.png">
+    <img src="foto2.png">
+  </div>
+
+  <div class="center">
+    <h1>only one</h1>
+    <p>Entre todas las vidas posibles,<br>te elijo a vos.</p>
+    <div class="symbols">✧ ☽ ♡ ✦</div>
+    <button class="music-button" onclick="document.getElementById('playlist').style.display='block'">▶ tocar música</button>
+    <div id="playlist" style="display:none; margin-top: 20px;">
+      <iframe src="https://open.spotify.com/embed/track/TU_LINK_AQUI" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
 
-    <div class="center">
-        <h1>only one</h1>
-        <p>Entre todas las vidas posibles,<br>te elijo a vos.</p>
-        <div class="symbols">✧ ☽ ♡ ✦</div>
-
-        <button class="music-button" onclick="document.getElementById('playlist').style.display='block'">▶ tocar música</button>
-
-        <div id="playlist" style="display:none; margin-top:20px;">
-            <iframe src="https://open.spotify.com/embed/track/tu_link_aqui" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-
-        <div class="timeline">
-            <p>✧ 8 de diciembre de 2019<br>empezamos a salir</p>
-            <p>♡ con el tiempo nos elegimos</p>
-            <p>☽ hoy sos mi hogar</p>
-        </div>
+    <div class="timeline">
+      <p>✧ 8 de diciembre de 2019<br>empezamos a salir</p>
+      <p>♡ con el tiempo nos elegimos</p>
+      <p>☽ hoy sos mi hogar</p>
     </div>
+  </div>
 
-    <div class="side">
-        <img src="foto3.png">
-        <img src="foto4.png">
-        <img src="foto5.png">
-    </div>
+  <div class="side">
+    <img src="foto3.png">
+    <img src="foto4.png">
+    <img src="foto5.png">
+  </div>
 </div>
 
-<div class="game-section">
-    <h2>un pequeño juego ♡</h2>
-    <div id="ui">
-        ❤️ Amor: <span id="score">0</span>
-        <div id="reward-text" class="reward">saltá para empezar</div>
-    </div>
-
-    <div id="game-container" onclick="jump()">
-        <div id="player"></div>
-    </div>
-    <p style="font-size:0.8em; opacity:0.6">tocá el cuadro para saltar</p>
+<div class="center" style="padding-bottom:100px;">
+  <h2>un pequeño juego para vos ♡</h2>
+  <div id="ui">❤️ Amor: <span id="score">0</span></div>
+  <div id="game-container" onclick="jump()">
+    <div id="player"></div>
+  </div>
 </div>
 
 <script>
 let score = 0, isJumping = false, position = 0;
-const player = document.getElementById('player');
-const container = document.getElementById('game-container');
-const scoreElement = document.getElementById('score');
-const rewardText = document.getElementById('reward-text');
-
 function jump() {
-    if (isJumping) return;
-    isJumping = true;
-    let up = setInterval(() => {
-        if (position >= 100) {
-            clearInterval(up);
-            let down = setInterval(() => {
-                if (position <= 0) {
-                    clearInterval(down);
-                    isJumping = false;
-                }
-                position -= 5;
-                player.style.bottom = position + 'px';
-            }, 20);
-        }
-        position += 5;
-        player.style.bottom = position + 'px';
-    }, 20);
+  if (isJumping) return;
+  isJumping = true;
+  let up = setInterval(() => {
+    if (position >= 110) {
+      clearInterval(up);
+      let down = setInterval(() => {
+        if (position <= 0) { clearInterval(down); isJumping = false; }
+        position -= 5;
+        document.getElementById('player').style.bottom = position + 'px';
+      }, 20);
+    }
+    position += 5;
+    document.getElementById('player').style.bottom = position + 'px';
+  }, 20);
 }
 
 function createHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.innerHTML = '💖';
-    heart.style.left = '320px';
-    heart.style.bottom = Math.random() * 100 + 20 + 'px';
-    container.appendChild(heart);
-
-    let move = setInterval(() => {
-        let x = parseInt(heart.style.left);
-        // Colisión simple
-        if (x < 80 && x > 40 && position + 30 > parseInt(heart.style.bottom)) {
-            score++;
-            scoreElement.innerText = score;
-            if (score === 5) rewardText.innerText = "💋 premio: un beso";
-            if (score === 15) rewardText.innerText = "🏆 premio: abrazo eterno";
-            heart.remove();
-            clearInterval(move);
-        }
-        heart.style.left = x - 4 + 'px';
-        if (x < -20) { heart.remove(); clearInterval(move); }
-    }, 20);
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerHTML = '💖';
+  heart.style.left = '360px';
+  heart.style.bottom = Math.random() * 100 + 20 + 'px';
+  document.getElementById('game-container').appendChild(heart);
+  let move = setInterval(() => {
+    let x = parseInt(heart.style.left);
+    if (x < 80 && x > 50 && position + 30 > parseInt(heart.style.bottom)) {
+      score++;
+      document.getElementById('score').innerText = score;
+      heart.remove(); clearInterval(move);
+    }
+    heart.style.left = x - 4 + 'px';
+    if (x < -20) { heart.remove(); clearInterval(move); }
+  }, 20);
 }
-
 setInterval(createHeart, 2000);
 </script>
 
